@@ -17,3 +17,74 @@
 - JPA를 구현한 구현체이며, 여러 구현체 중 가장 대표적인 구현체이다.
 
 ### Spring Data JPA
+- JPA를 추상화한 Repository 인터페이스를 제공하여 JPA를 쓰기 편하게 다양한 기능을 지원한다.
+- 내부적으로는 JPA를 사용한다. 그래서 JPA를 모르면 내부 구조를 이해하기 힘들 수 있다.
+
+### JDK 설치 하기전
+- Program Files 경로 삭제
+- 환경변수 -> 11버전 jdk 경로 변경
+- JPA 설정
+```
+#server
+server:
+  port: 10000
+
+#jdbc
+spring:
+  datasource:
+    driver-class-name: oracle.jdbc.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:XE
+    username: hr
+    password: hr
+
+  #jpa
+  jpa:
+    hibernate:
+      #ddl-auto: create -> DROP 후 CREATE
+      #ddl-auto: create-drop -> DROP 후 CREATE 후 DROP, DML 사용 시 DROP
+      #ddl-auto: update -> Entity와 DB 스키마 비교 후 수정 사항 반영(컬럼 추가) -> update를 먼저 써라
+      #ddl-auto: validate -> Entity와 DB 스키마 비교 후 불칠치 시 오류
+
+    #jpa format
+    properties:
+      hibernate:
+        format_sql: true
+    show-sql: true
+
+  #log
+  output:
+    ansi:
+      enabled: always
+```
+
+## QueryDSL
+모든 절이 메소드로 구현되어 있다
+
+### Page
+페이지 단위가 필요할 때(공지사항, 문의, 관리자)
+
+### Slice
+페이지 단위가 필요 없을 때(클라, 카드배너, 썸네일)
+```
+PageImpl<>(content, pageable, count)
+SliceImpl<>(content, pageable, hasNext)
+```
+
+### 엔티티
+- 상속 관계
+- 전략 3가지
+1. SINGLE TABLE
+2. JOINED
+3. 연관관계
+```
+1:1
+1:N : 단방향 쓰지 말아라! 반대 매핑
+N:1 : 기본(default)
+N:N : 제발 하지마라, N:1, 1:N로 풀어내라
+
+단방향: 객체는 단방향밖에 없음
+양방향: RDB에는 양방향 밖에 없음
+해결: 객체에서 단방향 2개로 양방향을 만들자
+
+양방향: 연관관계의 주인(FK를 추가, 수정할 수 있는 객체)
+```
