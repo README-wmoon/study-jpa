@@ -1,0 +1,16 @@
+Spring IOC 컨테이너, Spring Bean 컨테이너, Spring 컨테이너
+
+@Configuration, @Bean(컨테이너에 등록), @Component(MyBatis -> vo객체 쓸떄), @Mapper(Interface에 쓸때), @Repository(DAO 라는 클래스화), @Service(service or class -> interface를 두개를 정할때), @Controller(요청에 대한 응답을 하기 위해서)
+
+3-Tier(Persistence, Business, Presentation)
+
+Spring MVC(Front-Controller Pattern)
+@RequestParam(1. Null 값을 받을때, 2. Parameter 받을때(LIST를 쓸때)), @RequestBody(화면에서 데이터나 DB를 쓸때 JSON DATA를 받을때 -> 알아서 mapping되어 쓰인다.), @ResponseBody(REST가 필요할떄), @RestController(전체를 REST로 Controller를 쓰일떄)
+
+@Transactional(자동 커밋이나 롤백을 시킬때) -> scope -> interface 안에 interface가 있을때
+
+AOP(관점지향), Proxy
+
+MultipartRequest
+
+DBMS 정규화와 반정규화, 상속관계(SUPER KEY, SUB KEY), 연관관계(FK), 중간 테이블, INNER JOIN, OUTER JOIN(실무에서 많이 쓰인다)

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>추가 정보 입력</title>
+    <link rel="shortcut icon" href="/images/favicon.png">
+    <link rel="stylesheet" href="/css/member/member.css">
+    <link rel="stylesheet" href="/css/member/term.css">
+    <link rel="stylesheet" href="/css/member/info.css">
+    <link rel="stylesheet" href="/css/modal/modal.css">
+</head>
+<body>
+<main id="join">
+    <form th:action="@{/member/join}" method="post">
+        <div class="info">
+            <div class="info-container">
+                <label>이메일</label>
+                <span>
+                    <input type="text" id="email" name="memberEmail" autocomplete="off" placeholder="영문 혹은 한글, 2~20자" th:value="${member.memberEmail}" readonly>
+                    <img width="16px">
+                </span>
+                <p class="help"></p>
+            </div>
+            <div class="info-container">
+                <label>이름</label>
+                <span>
+                    <input type="text" id="name" name="memberName" autocomplete="off" placeholder="영문 혹은 한글, 2~20자" th:value="${member.memberName}" readonly>
+                    <img width="16px">
+                </span>
+                <p class="help"></p>
+            </div>
+            <div class="info-container">
+                <label>생년월일</label>
+                <span>
+                    <input type="text" id="birth" name="memberBirth" autocomplete="off" placeholder="예) 19990101">
+                    <img width="16px">
+                </span>
+                <p class="help"></p>
+            </div>
+            <button class="next" >완료</button>
+        </div>
+    </form>
+</main>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script>
+    $("#birth").on("blur", () => {
+        const value = $("#birth").val();
+        $("#birth").val(value.replace(/^(\d{4})(\d{2})(\d{2})$/, `$1.$2.$3`));
+    });
+</script>
+</html>

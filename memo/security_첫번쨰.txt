@@ -1,0 +1,59 @@
+스프링 시큐리티
+스프링 기반의 보안 프레임워크로서 애플리케이션에서 인증, 인가, 보안 등의 기능을 제공한다.
+시큐리티를 공부하기 위해서는 기본적인 스프링 프레임워크를 이해하고 넘어가자.
+
+스프링은 스레드로 나눠져 있으므로 해당 요청의 context는 개별적인 스레드로 분리 되어 있다.
+자바의 상태 변수를 여러개의 스레드가 공유하게 되면 상태는 다른 스레드에 영향을 주게 된다.
+
+동기화문제를 막기 위해서는 스레드에 안전하도록 상태를 불변하게 만들거나 함수형 프로그래밍으로 설계 또는 세마포어를 이용한다.
+세마포어를 사용하면 스레드 간의 동기화를 구현하거나 스레드에 안전하게 바꿀 수 있다.
+
+JPA를 사용하기 위한 yaml 설정
+
+spring:
+  jpa:
+    open-in-view: true
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+      default_batch_fetch_size: 100 # in query 자동
+
+컨트롤러 생성
+@RestController
+@RequiredArgsConstructor
+public class HelloController {
+    
+    @GetMapping("/")
+    public ResponseEntity<?> hello(){
+        
+    return ResponseEntity.ok().body("ok");
+    }
+}
+
+Yaml변경
+yaml에서 시큐리티 패스워드를 변경할 수 있다
+ security:
+    user:
+      name: ssar
+      password: 1234 # 패스워드
+
+최초요청과 재요청
+브라우저에는 쿠키에 저장되어 있으며 서버요청을 해야된다
+서버요청에는 세션이 있다 -> 쿠키쪽에서 세션쪽에 요청을 할때 session id가 필요하다
+문제점
+다른 컴퓨터에서도 session이 계속 있어서 session 유지기간들을 놔둔다 ex) 은행앱
+
+스프링 요청과 응답
+Dispatcher sevlet에서 요청을 받기전 filter가 있다 즉 필터체인 ex)method.
+Request을 받으면 filter를 거쳐서 Dispatcher sevlet로가서 interceptor쪽으로 간다 
+interceptor쪽에서 controoler로 가기전에 실행될 것(preHandler)인지 
+아니면 응답이 다 되고 실행(postHandler)되는지 정할 수가 있다.
+사용자가 URL을 요청하였을때 인증이 되었는지와 권한이 있는지 검사한다
+그래서 frame쪽에서 interceptor를 작업하며 요청을 해야된다
+AOP는 controller를 가기전에 작업하는 소스이다
+따라서 before는 controller를 작업하기 전 
+그리고 controller를 작업이 끝나고 나면 after 어노테이션이 작동이된다
+그러고 나서 postHandler가 오고 Response가 된다.

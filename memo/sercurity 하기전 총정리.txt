@@ -1,0 +1,41 @@
+ORM: RDB 진영을 객체 진영에서 관리하는 기술
+JPA: JAVA에 특화된 ORM 껍데기, Hibernate가 알맹이
+Spring Data JPA: 쿼리 메소드, 벌크 연산
+QueryDSL: 모든 절이 메소드로 구현되어 있다.
+
+Page: 페이지 단위가 필요할 때(공지사항, 문의, 관리자)
+Slice: 페이지 단위가 필요 없을 때(클라, 카드배너, 썸네일)
+
+PageImpl<>(content, pageable, count)
+SliceImpl<>(content, pageable, hasNext)
+
+엔티티
+   상속 관계
+      전략 3개
+      1. SINGLE TABLE
+      2. JOINED
+
+   연관 관계
+      1:1
+      1:N : 단방향 쓰지 말아라! 반대 매핑
+      N:1 : 기본(default)
+      N:N : 제발 하지마라, N:1, 1:N로 풀어내라
+
+      단방향: 객체는 단방향밖에 없음
+      양방향: RDB에는 양방향 밖에 없음
+      해결: 객체에서 단방향 2개로 양방향을 만들자
+
+      양방향: 연관관계의 주인(FK를 추가, 수정할 수 있는 객체)
+
+
+
+
+
+
+
+
+
+
+
+
+

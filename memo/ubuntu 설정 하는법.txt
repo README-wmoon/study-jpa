@@ -1,0 +1,88 @@
+> sudo passwd
+> su root
+> date
+> rm /etc/localtime
+> ln -s /usr/share/zoneinfo/Asia/Seoul /etc/localtime
+> date
+> export TZ=Asia/Seoul
+> sudo apt update
+> sudo apt upgrade (창 나오면 →, 엔터)
+> sudo apt -y install alien libaio1 unixodbc
+> mkdir /usr/oracle
+> chmod 777 /var/oracle
+
+  oracle-xe-11.2.0-1.0.x86_64.rpm.zip
+  https://drive.google.com/file/d/1k1ULIfKoFQXWBXt6Oujz5d4nnX4-z6bl/view?usp=sharing
+  FZ로 oracle-xe-11.2.0-1.0.x86_64.rpm.zip 전송
+
+> sudo apt install net-tools
+> netstat -nap
+  tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN
+> cd /usr/oracle
+> ls
+> apt install unzip
+> unzip oracle*.zip
+> cd Disk1
+> alien --scripts -d oracle*
+> dpkg -i oracle*.deb
+> /etc/init.d/oracle-xe configure
+  8080포트번호: 엔터
+  1521포트: 엔터
+  비밀번호 설정: 1234
+  비밀번호 확인: 1234
+> sudo systemctl start oracle-xe
+> sudo systemctl status oracle-xe
+> sudo vim ~/.bashrc
+**************************************************************************************
+  i 입력, 최하단에 작성
+
+  export ORACLE_HOME=/u01/app/oracle/product/11.2.0/xe 
+  export ORACLE_SID=XE export NLS_LANG=`$ORACLE_HOME/bin/nls_lang.sh` 
+  export ORACLE_BASE=/u01/app/oracle 
+  export LD_LIBRARY_PATH=$ORACLE_HOME/lib:$LD_LIBRARY_PATH 
+  export PATH=$ORACLE_HOME/bin:$PATH
+  . /u01/app/oracle/product/11.2.0/xe/bin/oracle_env.sh 
+
+  esc 입력, wq 엔터
+**************************************************************************************
+> source ~/.bashrc
+> export TZ=Asia/Seoul
+> sqlplus system/1234
+> alter user hr account unlock;
+> alter user hr indentified by hr;
+> conn hr/hr
+> exit
+> sqlplus sys as sysdba
+> 1234
+> alter database set time_zone = 'Asia/Seoul';
+> select systimestamp from dual;
+**************************************************************************************
+인텔리제이 JAR 파일 배포
+   우측 Gradle 탭 > Tasks > build > bootjar 더블 클릭
+   프로젝트 경로\build\libs\에 .jar파일 확인
+
+yml파일
+   localhost자리에 퍼블릭 IP로 대체
+
+> mkdir /usr/project
+> chmod 777 /usr/project
+
+파일 질라에서 해당 경로로 .jar파일 이동
+
+> java -jar /usr/project/ex01-1.0.jar
+
+인바운드 규칙 설정
+
+공인아이피주소:톰캣설정포트/경로
+
+------------------------------------------------------------------------------------------
+
+sudo apt-get install openjdk-11-jdk
+javac -version
+java -version
+vim ~/.bashrc
+   최하단에 추가
+   export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+   export PATH=$PATH:$JAVA_HOME/bin
+source ~/.bashrc
+echo $JAVA_HOME
