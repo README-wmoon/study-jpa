@@ -142,9 +142,7 @@ security:
 다른 컴퓨터에서도 session이 계속 있어서 session 유지기간들을 놔둔다 ex) 은행앱
 
 ### 스프링 요청과 응답
-<a href="#">
-	<img src="https://images/filter.png" width="400px" alt="image">
-</a>
+<img src="https://github.com/README-wmoon/study-jpa/assets/129862668/9427ab57-5aac-4e8a-8802-83ec6e501fb9" style = "width: 80%; height : 480"><br>
 
 ```
 Dispatcher sevlet에서 요청을 받기전 filter가 있다 즉 필터체인 ex)method.
