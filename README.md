@@ -159,7 +159,7 @@ AOP는 controller를 가기전에 작업하는 소스이다
 ▶ 예시로 다른그림에서도 볼수 있다
 <img src="https://github.com/README-wmoon/study-jpa/assets/129862668/34e94cdc-6a49-49c7-b6a7-6b79e782d566" style = "width: 80%; height : 480"><br>
 
-## ★☆★☆★☆★☆요청
+### ★☆★☆★☆★☆요청
 <img src="https://github.com/README-wmoon/study-jpa/assets/129862668/3e1eaef8-5dd7-4772-a83e-c64630b836f9" style = "width: 80%; height : 480"><br>
 - 왼쪽(그림)위에 보면 필터체인을 통해 dispatcherServerlet(아래)으로 이동한다
 - FilterChainProxy서버는 자체적으로 생기지만 오른쪽그림에서 개발자가 옵션을 코딩하여 설정을 넣어줄 수 있다
