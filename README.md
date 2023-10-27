@@ -143,7 +143,7 @@ security:
 
 ### 스프링 요청과 응답
 <a href="#">
-	<img src="/images/filter.jpg" width="400px" alt="image">
+	<img src="/images/filter.png" width="400px" alt="image">
 </a>
 
 ```
